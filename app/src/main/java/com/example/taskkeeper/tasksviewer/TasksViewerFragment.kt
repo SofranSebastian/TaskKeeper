@@ -2,6 +2,7 @@ package com.example.taskkeeper.tasksviewer
 
 import android.os.Bundle
 import android.text.Layout
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,7 +22,8 @@ import com.example.taskkeeper.taskdetail.TaskDetailFragment
 
 class TasksViewerFragment : Fragment() {
 
-     private lateinit var binding : FragmentTasksViewerBinding
+    private lateinit var binding : FragmentTasksViewerBinding
+    private val tasksList = mutableListOf<TaskItem>()
 
     //variables for the animations types
     private val rotateOpen: Animation by lazy {
@@ -39,19 +42,7 @@ class TasksViewerFragment : Fragment() {
         AnimationUtils.loadAnimation(context, R.anim.to_bottom_animation)
     }
 
-    private var tasksList : List<TaskItem> = listOf(
-                                                        TaskItem(1,"Task1","Random subtitle."),
-                                                        TaskItem(2,"Task2","Random subtitle."),
-                                                        TaskItem(3,"Task3","Random subtitle."),
-                                                        TaskItem(1,"Task4","Random subtitle."),
-                                                        TaskItem(2,"Task5","Random subtitle."),
-                                                        TaskItem(0,"Task6","Random subtitle."),
-                                                        TaskItem(1,"Task7","Random subtitle."),
-                                                        TaskItem(1,"Task8","Random subtitle."),
-                                                        TaskItem(3,"Task9","Random subtitle."),
-                                                        TaskItem(2,"Task10","Random subtitle.")
-                                                    )
-
+    //method for setting the visibility of the FAB buttons
     private fun setVisibility(clicked: Boolean){
         if(clicked){
             binding.addTaskButton.visibility = View.VISIBLE
@@ -62,6 +53,7 @@ class TasksViewerFragment : Fragment() {
         }
     }
 
+    //method for setting the animation of the FAB buttons
     private fun setAnimation(clicked: Boolean){
         if(clicked){
             binding.seeMoreButton.startAnimation(rotateOpen)
@@ -78,41 +70,54 @@ class TasksViewerFragment : Fragment() {
 
         //reference for the binding object
         binding = DataBindingUtil.inflate( inflater, R.layout.fragment_tasks_viewer, container,false)
+        return binding.root
 
-        //creating view model and view model factory
-        val viewModelFactory = TasksViewerViewModelFactory(tasksList)
-        val tasksViewerViewModel = ViewModelProvider(this, viewModelFactory)
-                        .get(TasksViewerViewModel::class.java)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        //create the VM
+        val tasksViewerViewModel : TasksViewerViewModel by viewModels()
 
         //binding the view model to the layout
         binding.tasksViewerViewModel = tasksViewerViewModel
 
+        //observer for the tasksList from the VM
+        tasksViewerViewModel.tasksList.observe(viewLifecycleOwner, Observer {
+            it -> it?.let{
+                tasksList.clear()
+                tasksList.addAll(it)
+            }
+        })
+
+        //create the adapter
         val adapter = TaskAdapter(tasksList, TaskListener { it ->
             tasksViewerViewModel.onTaskClicked(it)
         })
 
-
+        //bindings for the RecyclerView
         binding.tasksList.adapter = adapter
         binding.tasksList.layoutManager = LinearLayoutManager(this.context)
 
-
+        //observer for the navigation to the TaskDetailFragment
         tasksViewerViewModel.navigateToTaskDetail.observe(viewLifecycleOwner, Observer{
                 it -> it?.let{
-                    this.findNavController().navigate(
+                this.findNavController().navigate(
                         TasksViewerFragmentDirections.navigateToTaskDetail(it)
-                    )
-                    tasksViewerViewModel.onTaskDetailNavigated()
-                }
+                )
+                tasksViewerViewModel.onTaskDetailNavigated()
+            }
         })
 
-
+        //observer for the click listener for the 'See More' button
         tasksViewerViewModel.seeMoreClicked.observe(viewLifecycleOwner, Observer {
-            it-> it?.let{
+                it-> it?.let{
                 setVisibility(it)
                 setAnimation(it)
             }
         })
 
+        //dummy click listeners for the 'Delete All' and 'Add' FAB's
         binding.deleteAllButton.setOnClickListener {
             Toast.makeText(context,"Am apasat pe delete all!", Toast.LENGTH_SHORT).show()
         }
@@ -120,8 +125,5 @@ class TasksViewerFragment : Fragment() {
         binding.addTaskButton.setOnClickListener {
             Toast.makeText(context,"Am apasat pe add!", Toast.LENGTH_SHORT).show()
         }
-
-        return binding.root
     }
-
 }
