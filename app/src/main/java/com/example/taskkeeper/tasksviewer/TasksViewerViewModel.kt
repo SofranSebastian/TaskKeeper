@@ -7,6 +7,17 @@ import androidx.lifecycle.ViewModel
 
 class TasksViewerViewModel(item: List<TaskItem>) : ViewModel() {
 
+    private val _seeMoreClicked = MutableLiveData<Boolean>(false)
+    val seeMoreClicked : LiveData<Boolean>
+        get() = _seeMoreClicked
+
+
+    fun onClick(){
+        _seeMoreClicked.value?.let{
+            _seeMoreClicked.value = !it
+        }
+    }
+
     private val _navigateToTaskDetail = MutableLiveData<String>()
     val navigateToTaskDetail
         get() = _navigateToTaskDetail
