@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskkeeper.databinding.FragmentTasksViewerBinding
@@ -83,12 +84,12 @@ class TasksViewerFragment : Fragment() {
         binding.tasksViewerViewModel = tasksViewerViewModel
 
         //observer for the tasksList from the VM
-        tasksViewerViewModel.tasksList.observe(viewLifecycleOwner, Observer {
-            it -> it?.let{
+        tasksViewerViewModel.tasksList.observe(viewLifecycleOwner){
+            it?.let{
                 tasksList.clear()
                 tasksList.addAll(it)
             }
-        })
+        }
 
         //create the adapter
         val adapter = TaskAdapter(tasksList, TaskListener { it ->
@@ -100,22 +101,20 @@ class TasksViewerFragment : Fragment() {
         binding.tasksList.layoutManager = LinearLayoutManager(this.context)
 
         //observer for the navigation to the TaskDetailFragment
-        tasksViewerViewModel.navigateToTaskDetail.observe(viewLifecycleOwner, Observer{
-                it -> it?.let{
-                this.findNavController().navigate(
-                        TasksViewerFragmentDirections.navigateToTaskDetail(it)
-                )
+        tasksViewerViewModel.navigateToTaskDetail.observe(viewLifecycleOwner){
+            it?.let{
+                this.findNavController().navigate(TasksViewerFragmentDirections.navigateToTaskDetail(it))
                 tasksViewerViewModel.onTaskDetailNavigated()
             }
-        })
+        }
 
         //observer for the click listener for the 'See More' button
-        tasksViewerViewModel.seeMoreClicked.observe(viewLifecycleOwner, Observer {
-                it-> it?.let{
+        tasksViewerViewModel.seeMoreClicked.observe(viewLifecycleOwner){
+            it?.let{
                 setVisibility(it)
                 setAnimation(it)
             }
-        })
+        }
 
         //dummy click listeners for the 'Delete All' and 'Add' FAB's
         binding.deleteAllButton.setOnClickListener {
