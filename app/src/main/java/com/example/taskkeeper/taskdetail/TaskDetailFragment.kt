@@ -11,16 +11,19 @@ import com.example.taskkeeper.databinding.FragmentTaskDetailBinding
 
 class TaskDetailFragment : Fragment() {
 
+    private lateinit var binding : FragmentTaskDetailBinding
+
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ) : View? {
 
-        val binding : FragmentTaskDetailBinding = DataBindingUtil.inflate( inflater, R.layout.fragment_task_detail, container, false)
-
-        val arguments = TaskDetailFragmentArgs.fromBundle(requireArguments())
-
-        binding.title.text = arguments.title
-
+        binding = DataBindingUtil.inflate( inflater, R.layout.fragment_task_detail, container, false)
         return binding.root
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val arguments = TaskDetailFragmentArgs.fromBundle(requireArguments())
+        binding.title.text = arguments.title
+
+    }
 }
