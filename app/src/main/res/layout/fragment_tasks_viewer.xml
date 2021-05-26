@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="clicked"
+            type="com.example.taskkeeper.tasksviewer.TasksViewerFragment" />
+        <variable
             name="tasksViewerViewModel"
             type="com.example.taskkeeper.tasksviewer.TasksViewerViewModel" />
     </data>
@@ -21,5 +24,52 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_task_layout"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/see_more_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:tint="@color/white"
+            app:backgroundTint="@color/purple_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_see_more"
+            tools:ignore="VectorDrawableCompat"
+            android:onClick="@{()->tasksViewerViewModel.onClick()}"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_task_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="invisible"
+            app:backgroundTint="@color/purple_500"
+            app:layout_constraintBottom_toTopOf="@+id/see_more_button"
+            app:layout_constraintEnd_toEndOf="@+id/see_more_button"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/white"
+            tools:ignore="MissingConstraints,VectorDrawableCompat" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/delete_all_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:backgroundTint="@color/purple_500"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/add_task_button"
+            app:layout_constraintEnd_toEndOf="@+id/add_task_button"
+            app:srcCompat="@drawable/ic_delete"
+            app:tint="@color/white"
+            tools:ignore="VectorDrawableCompat" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
