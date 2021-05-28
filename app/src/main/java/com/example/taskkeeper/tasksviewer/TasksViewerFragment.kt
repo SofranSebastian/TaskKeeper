@@ -19,6 +19,7 @@ import com.example.taskkeeper.databinding.FragmentTasksViewerBinding
 class TasksViewerFragment : Fragment() {
 
     private lateinit var binding: FragmentTasksViewerBinding
+    private val tasksViewerViewModel: TasksViewerViewModel by viewModels()
     private val tasksList = mutableListOf<TaskItem>()
 
     //variables for the animations types
@@ -71,9 +72,6 @@ class TasksViewerFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        //create the VM
-        val tasksViewerViewModel: TasksViewerViewModel by viewModels()
 
         //binding the view model to the layout
         binding.tasksViewerViewModel = tasksViewerViewModel
