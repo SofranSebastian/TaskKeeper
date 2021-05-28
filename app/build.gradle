@@ -54,6 +54,7 @@ dependencies {
 
     //Room
     implementation "androidx.room:room-runtime:$androidx_room_version"
+    annotationProcessor "androidx.room:room-compiler:$androidx_room_version"
     kapt "androidx.room:room-compiler:$androidx_room_version"
     implementation "androidx.room:room-ktx:$androidx_room_version"
     androidTestImplementation "androidx.room:room-testing:$androidx_room_version"
