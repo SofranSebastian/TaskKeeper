@@ -52,6 +52,12 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version"
 
+    //Room
+    implementation "androidx.room:room-runtime:$androidx_room_version"
+    kapt "androidx.room:room-compiler:$androidx_room_version"
+    implementation "androidx.room:room-ktx:$androidx_room_version"
+    androidTestImplementation "androidx.room:room-testing:$androidx_room_version"
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
