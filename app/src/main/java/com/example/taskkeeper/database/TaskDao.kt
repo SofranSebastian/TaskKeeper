@@ -1,10 +1,7 @@
 package com.example.taskkeeper.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface TaskDao {
@@ -17,4 +14,16 @@ interface TaskDao {
     //no annotation for the Select so a query needs to be done here
     @Query("SELECT * FROM task_table ORDER BY id ASC")
     fun getAllTasks(): LiveData<List<Task>>
+
+    //update a task
+    @Update
+    suspend fun updateTask(task: Task)
+
+    //delete a single task
+    @Delete
+    suspend fun deleteTask(task: Task)
+
+    //delete all tasks
+    @Query("DELETE FROM task_table")
+    suspend fun deleteAllTasks()
 }
