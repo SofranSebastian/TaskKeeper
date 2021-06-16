@@ -19,8 +19,8 @@
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" >
         <argument
-            android:name="title"
-            app:argType="string"
+            android:name="item"
+            app:argType="com.example.taskkeeper.database.TaskItem"
             />
         <action
             android:id="@+id/navigateToTasksViewer"

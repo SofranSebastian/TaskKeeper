@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Task Keeper</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="priority_values">
+        <item>HIGH</item>
+        <item>MODERATE</item>
+        <item>LOW</item>
+    </string-array>
 </resources>
