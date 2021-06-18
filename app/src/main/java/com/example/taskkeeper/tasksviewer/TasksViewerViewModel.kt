@@ -1,25 +1,43 @@
 package com.example.taskkeeper.tasksviewer
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.taskkeeper.database.Task
+import com.example.taskkeeper.database.TaskDatabase
+import com.example.taskkeeper.database.TaskItem
+import com.example.taskkeeper.database.TaskRepository
+import com.example.taskkeeper.utils.toTaskItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class TasksViewerViewModel() : ViewModel() {
+class TasksViewerViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _tasksList = MutableLiveData<List<TaskItem>>(listOf(
-            TaskItem(1, "Task1", "Random subtitle."),
-            TaskItem(2, "Task2", "Random subtitle."),
-            TaskItem(3, "Task3", "Random subtitle."),
-            TaskItem(1, "Task4", "Random subtitle."),
-            TaskItem(2, "Task5", "Random subtitle."),
-            TaskItem(0, "Task6", "Random subtitle."),
-            TaskItem(1, "Task7", "Random subtitle."),
-            TaskItem(1, "Task8", "Random subtitle."),
-            TaskItem(3, "Task9", "Random subtitle."),
-            TaskItem(2, "Task10", "Random subtitle.")
-    ))
-    val tasksList: LiveData<List<TaskItem>>
-        get() = _tasksList
+    private val repository: TaskRepository
+
+    //first executed when the TasksViewerViewModel is called
+    init {
+        val taskDao = TaskDatabase.getDatabase(application).userDao()
+        repository = TaskRepository(taskDao)
+    }
+
+    private val tasksList: LiveData<List<Task>>
+        get() = repository.getAllTasks
+
+    val tasksListMapped: LiveData<List<TaskItem>> = Transformations.map(tasksList) { list ->
+        list.map { it.toTaskItem() }
+    }
+
+    fun addTask(task: Task) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addTask(task)
+        }
+    }
+
+    fun deleteAllTasks() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllTasks()
+        }
+    }
 
     private val _seeMoreClicked = MutableLiveData<Boolean>(false)
     val seeMoreClicked: LiveData<Boolean>
@@ -31,12 +49,12 @@ class TasksViewerViewModel() : ViewModel() {
         }
     }
 
-    private val _navigateToTaskDetail = MutableLiveData<String>()
+    private val _navigateToTaskDetail = MutableLiveData<TaskItem>()
     val navigateToTaskDetail
         get() = _navigateToTaskDetail
 
-    fun onTaskClicked(title: String) {
-        _navigateToTaskDetail.value = title
+    fun onTaskClicked(task: TaskItem) {
+        _navigateToTaskDetail.value = task
     }
 
     fun onTaskDetailNavigated() {

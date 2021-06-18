@@ -1,12 +1,12 @@
 package com.example.taskkeeper.tasksviewer
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,7 +20,7 @@ class TasksViewerFragment : Fragment() {
 
     private lateinit var binding: FragmentTasksViewerBinding
     private val tasksViewerViewModel: TasksViewerViewModel by viewModels()
-    private val tasksList = mutableListOf<TaskItem>()
+    private lateinit var adapter: TaskAdapter
 
     //variables for the animations types
     private val rotateOpen: Animation by lazy {
@@ -63,10 +63,15 @@ class TasksViewerFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         //reference for the binding object
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tasks_viewer, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_tasks_viewer, container, false)
         return binding.root
 
     }
@@ -76,18 +81,15 @@ class TasksViewerFragment : Fragment() {
         //binding the view model to the layout
         binding.tasksViewerViewModel = tasksViewerViewModel
 
-        //observer for the tasksList from the VM
-        tasksViewerViewModel.tasksList.observe(viewLifecycleOwner) {
-            it?.let {
-                tasksList.clear()
-                tasksList.addAll(it)
-            }
-        }
-
         //create the adapter
-        val adapter = TaskAdapter(tasksList, TaskListener { it ->
+        adapter = TaskAdapter(mutableListOf(), TaskListener { it ->
             tasksViewerViewModel.onTaskClicked(it)
         })
+
+        //observer for the tasksList from the VM
+        tasksViewerViewModel.tasksListMapped.observe(viewLifecycleOwner) {
+            adapter.setList(it)
+        }
 
         //bindings for the RecyclerView
         binding.tasksList.adapter = adapter
@@ -96,7 +98,8 @@ class TasksViewerFragment : Fragment() {
         //observer for the navigation to the TaskDetailFragment
         tasksViewerViewModel.navigateToTaskDetail.observe(viewLifecycleOwner) {
             it?.let {
-                this.findNavController().navigate(TasksViewerFragmentDirections.navigateToTaskDetail(it))
+                this.findNavController()
+                    .navigate(TasksViewerFragmentDirections.navigateToTaskDetail(it))
                 tasksViewerViewModel.onTaskDetailNavigated()
             }
         }
@@ -111,11 +114,25 @@ class TasksViewerFragment : Fragment() {
 
         //dummy click listeners for the 'Delete All' and 'Add' FAB's
         binding.deleteAllButton.setOnClickListener {
-            Toast.makeText(context, "Am apasat pe delete all!", Toast.LENGTH_SHORT).show()
+            val dialogBuilder = AlertDialog.Builder(requireContext())
+
+            dialogBuilder.setPositiveButton("Yes") { _, _ ->
+                tasksViewerViewModel.deleteAllTasks()
+            }
+
+            dialogBuilder.setNegativeButton("No") { _, _ ->
+            }
+
+            dialogBuilder.setTitle("Delete all tasks")
+
+            dialogBuilder.setMessage("Do you want to delete all tasks?")
+
+            dialogBuilder.create().show()
         }
 
         binding.addTaskButton.setOnClickListener {
-            Toast.makeText(context, "Am apasat pe add!", Toast.LENGTH_SHORT).show()
+            val bottomSheetFragment = BottomSheetFragment()
+            bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialog")
         }
     }
 }

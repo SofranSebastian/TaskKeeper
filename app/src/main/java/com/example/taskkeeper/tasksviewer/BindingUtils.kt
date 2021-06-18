@@ -1,32 +1,34 @@
 package com.example.taskkeeper.tasksviewer
 
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
-import com.example.taskkeeper.R
+import com.example.taskkeeper.database.TaskItem
 
-@BindingAdapter("imageResource")
-fun ImageView.setImageView(item: TaskItem) {
-    item?.let {
-        setImageResource(when (item.image) {
-            1 -> R.drawable.ic_android
-            2 -> R.drawable.ic_run
-            3 -> R.drawable.ic_bike
-            else -> R.drawable.ic_empty
-        })
-    }
-}
 
 @BindingAdapter("titleText")
 fun TextView.setTitleText(item: TaskItem) {
     item?.let {
-        text = item.title
+        text = item.title?.toUpperCase()
     }
 }
 
 @BindingAdapter("subtitleText")
 fun TextView.setSubtitleText(item: TaskItem) {
     item?.let {
-        text = item.subtitle
+        text = item.description
+    }
+}
+
+@BindingAdapter("cardViewBackground")
+fun CardView.setBackgroundCard(item: TaskItem) {
+    item?.let {
+    }
+}
+
+@BindingAdapter("priorityText")
+fun TextView.setPriorityText(item: TaskItem) {
+    item?.let {
+        text = item.priority
     }
 }
