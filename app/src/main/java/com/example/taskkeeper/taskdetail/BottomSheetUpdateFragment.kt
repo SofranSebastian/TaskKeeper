@@ -15,7 +15,7 @@ import com.example.taskkeeper.databinding.BottomsheetModalUpdateFormBinding
 import com.example.taskkeeper.utils.toTaskItem
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetFragmentUpdate(private val individualTask: Task) : BottomSheetDialogFragment() {
+class BottomSheetUpdateFragment(private val individualTask: Task) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomsheetModalUpdateFormBinding
     private val taskDetailViewModel: TaskDetailViewModel by viewModels()
@@ -54,7 +54,7 @@ class BottomSheetFragmentUpdate(private val individualTask: Task) : BottomSheetD
         val description = binding.descriptionTextInput.text.toString()
         val priority = binding.spinner.selectedItem.toString()
 
-        return if (checkInput(title, description, priority)) {
+        return if (checkInput(title, description)) {
             val task = Task(
                 id = individualTask.id,
                 title = title,
@@ -73,7 +73,7 @@ class BottomSheetFragmentUpdate(private val individualTask: Task) : BottomSheetD
         }
     }
 
-    private fun checkInput(title: String, description: String, priority: String): Boolean {
+    private fun checkInput(title: String, description: String): Boolean {
         return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(description))
     }
 

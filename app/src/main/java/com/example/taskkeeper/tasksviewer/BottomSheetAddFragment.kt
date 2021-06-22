@@ -13,7 +13,7 @@ import com.example.taskkeeper.database.Task
 import com.example.taskkeeper.databinding.BottomsheetModalAddFormBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetFragment : BottomSheetDialogFragment() {
+class BottomSheetAddFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomsheetModalAddFormBinding
     private val tasksViewerViewModel: TasksViewerViewModel by viewModels()
