@@ -83,7 +83,7 @@ class TaskDetailFragment : Fragment() {
     }
 
     private fun updateTask() {
-        val bottomSheetFragment = BottomSheetFragmentUpdate(arguments.item.toTask())
+        val bottomSheetFragment = BottomSheetUpdateFragment(arguments.item.toTask())
         bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialogUpdate")
     }
 }
