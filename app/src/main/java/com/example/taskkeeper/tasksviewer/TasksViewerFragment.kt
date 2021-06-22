@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskkeeper.R
 import com.example.taskkeeper.databinding.FragmentTasksViewerBinding
@@ -106,10 +107,8 @@ class TasksViewerFragment : Fragment() {
 
         //observer for the click listener for the 'See More' button
         tasksViewerViewModel.seeMoreClicked.observe(viewLifecycleOwner) {
-            it?.let {
-                setVisibility(it)
-                setAnimation(it)
-            }
+            setVisibility(it)
+            setAnimation(it)
         }
 
         //dummy click listeners for the 'Delete All' and 'Add' FAB's
@@ -131,8 +130,13 @@ class TasksViewerFragment : Fragment() {
         }
 
         binding.addTaskButton.setOnClickListener {
-            val bottomSheetFragment = BottomSheetFragment()
+            val bottomSheetFragment = BottomSheetAddFragment()
             bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialog")
         }
+
+        val bnv = binding.bottomNavigationView
+        val navController = this.findNavController()
+        bnv.setupWithNavController(navController)
+
     }
 }
