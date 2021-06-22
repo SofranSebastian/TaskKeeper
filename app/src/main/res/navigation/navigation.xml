@@ -26,4 +26,8 @@
             android:id="@+id/navigateToTasksViewer"
             app:destination="@id/tasksViewerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/holidaysViewerFragment"
+        android:name="com.example.taskkeeper.holidays.HolidaysViewerFragment"
+        android:label="HolidaysViewerFragment" />
 </navigation>
