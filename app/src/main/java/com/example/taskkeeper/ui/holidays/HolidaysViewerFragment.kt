@@ -1,4 +1,4 @@
-package com.example.taskkeeper.holidays
+package com.example.taskkeeper.ui.holidays
 
 import android.os.Bundle
 import android.view.LayoutInflater

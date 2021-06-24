@@ -6,7 +6,7 @@
     app:startDestination="@id/tasksViewerFragment">
     <fragment
         android:id="@+id/tasksViewerFragment"
-        android:name="com.example.taskkeeper.tasksviewer.TasksViewerFragment"
+        android:name="com.example.taskkeeper.ui.tasksviewer.TasksViewerFragment"
         android:label="fragment_tasks_viewer"
         tools:layout="@layout/fragment_tasks_viewer" >
         <action
@@ -15,12 +15,12 @@
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.example.taskkeeper.taskdetail.TaskDetailFragment"
+        android:name="com.example.taskkeeper.ui.taskdetail.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" >
         <argument
             android:name="item"
-            app:argType="com.example.taskkeeper.database.TaskItem"
+            app:argType="com.example.taskkeeper.database.model.TaskItem"
             />
         <action
             android:id="@+id/navigateToTasksViewer"
@@ -28,6 +28,6 @@
     </fragment>
     <fragment
         android:id="@+id/holidaysViewerFragment"
-        android:name="com.example.taskkeeper.holidays.HolidaysViewerFragment"
+        android:name="com.example.taskkeeper.ui.holidays.HolidaysViewerFragment"
         android:label="HolidaysViewerFragment" />
 </navigation>

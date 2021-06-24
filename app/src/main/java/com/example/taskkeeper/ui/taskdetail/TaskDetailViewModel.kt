@@ -1,11 +1,11 @@
-package com.example.taskkeeper.taskdetail
+package com.example.taskkeeper.ui.taskdetail
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.taskkeeper.database.Task
+import com.example.taskkeeper.database.model.Task
 import com.example.taskkeeper.database.TaskDatabase
-import com.example.taskkeeper.database.TaskRepository
+import com.example.taskkeeper.repository.TaskRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

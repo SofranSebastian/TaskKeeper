@@ -1,9 +1,9 @@
-package com.example.taskkeeper.tasksviewer
+package com.example.taskkeeper.ui.tasksviewer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.taskkeeper.database.TaskItem
+import com.example.taskkeeper.database.model.TaskItem
 import com.example.taskkeeper.databinding.ItemTaskLayoutBinding
 
 class TaskAdapter(private val tasksList: MutableList<TaskItem>, val clickListener: TaskListener) :

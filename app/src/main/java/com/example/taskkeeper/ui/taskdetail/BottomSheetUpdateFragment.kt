@@ -1,4 +1,4 @@
-package com.example.taskkeeper.taskdetail
+package com.example.taskkeeper.ui.taskdetail
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -10,9 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.taskkeeper.R
-import com.example.taskkeeper.database.Task
+import com.example.taskkeeper.database.model.Task
 import com.example.taskkeeper.databinding.BottomsheetModalUpdateFormBinding
-import com.example.taskkeeper.utils.toTaskItem
+import com.example.taskkeeper.mapper.toTaskItem
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetUpdateFragment(private val individualTask: Task) : BottomSheetDialogFragment() {
@@ -56,10 +56,10 @@ class BottomSheetUpdateFragment(private val individualTask: Task) : BottomSheetD
 
         return if (checkInput(title, description)) {
             val task = Task(
-                id = individualTask.id,
-                title = title,
-                description = description,
-                priority = priority
+                    id = individualTask.id,
+                    title = title,
+                    description = description,
+                    priority = priority
             )
             taskDetailViewModel.updateTask(task)
             true

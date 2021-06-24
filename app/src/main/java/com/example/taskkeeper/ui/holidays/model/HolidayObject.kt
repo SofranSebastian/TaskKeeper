@@ -1,4 +1,4 @@
-package com.example.taskkeeper.holidays.model
+package com.example.taskkeeper.ui.holidays.model
 
 data class HolidayObject(
     val date: String,

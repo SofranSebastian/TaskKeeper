@@ -1,4 +1,4 @@
-package com.example.taskkeeper.tasksviewer
+package com.example.taskkeeper.ui.tasksviewer
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.taskkeeper.R
-import com.example.taskkeeper.database.Task
+import com.example.taskkeeper.database.model.Task
 import com.example.taskkeeper.databinding.BottomsheetModalAddFormBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

@@ -1,10 +1,11 @@
-package com.example.taskkeeper.holidays
+package com.example.taskkeeper.ui.holidays
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.taskkeeper.holidays.model.HolidayObject
+import com.example.taskkeeper.repository.HolidaysRepository
+import com.example.taskkeeper.ui.holidays.model.HolidayObject
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

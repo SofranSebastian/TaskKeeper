@@ -7,17 +7,17 @@
 
         <variable
             name="clicked"
-            type="com.example.taskkeeper.tasksviewer.TasksViewerFragment" />
+            type="com.example.taskkeeper.ui.tasksviewer.TasksViewerFragment" />
 
         <variable
             name="tasksViewerViewModel"
-            type="com.example.taskkeeper.tasksviewer.TasksViewerViewModel" />
+            type="com.example.taskkeeper.ui.tasksviewer.TasksViewerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".tasksviewer.TasksViewerFragment">
+        tools:context=".ui.tasksviewer.TasksViewerFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksList"

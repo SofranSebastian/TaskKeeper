@@ -8,14 +8,14 @@
 
         <variable
             name="taskDetailViewModel"
-            type="com.example.taskkeeper.taskdetail.TaskDetailViewModel" />
+            type="com.example.taskkeeper.ui.taskdetail.TaskDetailViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".taskdetail.TaskDetailFragment">
+        tools:context=".ui.taskdetail.TaskDetailFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"

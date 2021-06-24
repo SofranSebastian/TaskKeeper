@@ -1,4 +1,4 @@
-package com.example.taskkeeper.taskdetail
+package com.example.taskkeeper.ui.taskdetail
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.taskkeeper.R
 import com.example.taskkeeper.databinding.FragmentTaskDetailBinding
-import com.example.taskkeeper.utils.toTask
+import com.example.taskkeeper.mapper.toTask
 
 class TaskDetailFragment : Fragment() {
 

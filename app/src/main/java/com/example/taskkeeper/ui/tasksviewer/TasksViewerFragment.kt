@@ -1,4 +1,4 @@
-package com.example.taskkeeper.tasksviewer
+package com.example.taskkeeper.ui.tasksviewer
 
 import android.app.AlertDialog
 import android.os.Bundle

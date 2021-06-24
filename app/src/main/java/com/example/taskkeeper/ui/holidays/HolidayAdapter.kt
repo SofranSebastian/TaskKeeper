@@ -1,11 +1,11 @@
-package com.example.taskkeeper.holidays
+package com.example.taskkeeper.ui.holidays
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskkeeper.R
-import com.example.taskkeeper.holidays.model.HolidayObject
+import com.example.taskkeeper.ui.holidays.model.HolidayObject
 import kotlinx.android.synthetic.main.item_holiday_layout.view.*
 
 class HolidayAdapter : RecyclerView.Adapter<HolidayAdapter.ViewHolder>() {

@@ -7,14 +7,14 @@
 
         <variable
             name="taskDetailViewModel"
-            type="com.example.taskkeeper.holidays.HolidaysViewerViewModel" />
+            type="com.example.taskkeeper.ui.holidays.HolidaysViewerViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".holidays.HolidaysViewerFragment">
+        tools:context=".ui.holidays.HolidaysViewerFragment">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

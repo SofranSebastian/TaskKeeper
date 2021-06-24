@@ -7,11 +7,11 @@
 
         <variable
             name="item"
-            type="com.example.taskkeeper.database.TaskItem" />
+            type="com.example.taskkeeper.database.model.TaskItem" />
 
         <variable
             name="clickListener"
-            type="com.example.taskkeeper.tasksviewer.TaskListener" />
+            type="com.example.taskkeeper.ui.tasksviewer.TaskListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

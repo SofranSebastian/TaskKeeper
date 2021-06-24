@@ -1,12 +1,12 @@
-package com.example.taskkeeper.tasksviewer
+package com.example.taskkeeper.ui.tasksviewer
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.taskkeeper.database.Task
+import com.example.taskkeeper.database.model.Task
 import com.example.taskkeeper.database.TaskDatabase
-import com.example.taskkeeper.database.TaskItem
-import com.example.taskkeeper.database.TaskRepository
-import com.example.taskkeeper.utils.toTaskItem
+import com.example.taskkeeper.database.model.TaskItem
+import com.example.taskkeeper.repository.TaskRepository
+import com.example.taskkeeper.mapper.toTaskItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

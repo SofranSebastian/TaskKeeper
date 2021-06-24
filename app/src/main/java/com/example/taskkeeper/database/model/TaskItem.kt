@@ -1,4 +1,4 @@
-package com.example.taskkeeper.database
+package com.example.taskkeeper.database.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

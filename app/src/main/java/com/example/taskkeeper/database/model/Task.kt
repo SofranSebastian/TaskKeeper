@@ -1,4 +1,4 @@
-package com.example.taskkeeper.database
+package com.example.taskkeeper.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

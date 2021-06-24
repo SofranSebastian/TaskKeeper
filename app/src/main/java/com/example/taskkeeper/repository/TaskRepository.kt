@@ -1,6 +1,8 @@
-package com.example.taskkeeper.database
+package com.example.taskkeeper.repository
 
 import androidx.lifecycle.LiveData
+import com.example.taskkeeper.database.TaskDao
+import com.example.taskkeeper.database.model.Task
 
 class TaskRepository(private val taskDao: TaskDao) {
     val getAllTasks: LiveData<List<Task>> = taskDao.getAllTasks()

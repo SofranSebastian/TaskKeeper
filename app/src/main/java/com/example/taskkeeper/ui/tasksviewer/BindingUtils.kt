@@ -1,8 +1,8 @@
-package com.example.taskkeeper.tasksviewer
+package com.example.taskkeeper.ui.tasksviewer
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.taskkeeper.database.TaskItem
+import com.example.taskkeeper.database.model.TaskItem
 
 @BindingAdapter("titleText")
 fun TextView.setTitleText(item: TaskItem) {
