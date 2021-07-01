@@ -3,15 +3,19 @@ package com.example.taskkeeper.ui.holidays
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.taskkeeper.repository.HolidaysRepository
 import com.example.taskkeeper.ui.holidays.model.HolidayObject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
 
-class HolidaysViewerViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository: HolidaysRepository = HolidaysRepository()
+@HiltViewModel
+class HolidaysViewerViewModel @Inject constructor(
+    private val repository: HolidaysRepository
+) : ViewModel() {
 
     val holidaysList: MutableLiveData<Response<List<HolidayObject>>> = MutableLiveData()
 

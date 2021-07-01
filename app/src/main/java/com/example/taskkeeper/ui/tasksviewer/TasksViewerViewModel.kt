@@ -7,18 +7,15 @@ import com.example.taskkeeper.database.TaskDatabase
 import com.example.taskkeeper.database.model.TaskItem
 import com.example.taskkeeper.repository.TaskRepository
 import com.example.taskkeeper.mapper.toTaskItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TasksViewerViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository: TaskRepository
-
-    //first executed when the TasksViewerViewModel is called
-    init {
-        val taskDao = TaskDatabase.getDatabase(application).userDao()
-        repository = TaskRepository(taskDao)
-    }
+@HiltViewModel
+class TasksViewerViewModel @Inject constructor(
+    private var repository: TaskRepository
+) : ViewModel() {
 
     private val tasksList: LiveData<List<Task>>
         get() = repository.getAllTasks
