@@ -58,10 +58,10 @@ class BottomSheetUpdateFragment(private val individualTask: Task) : BottomSheetD
 
         return if (checkInput(title, description)) {
             val task = Task(
-                    id = individualTask.id,
-                    title = title,
-                    description = description,
-                    priority = priority
+                id = individualTask.id,
+                title = title,
+                description = description,
+                priority = priority
             )
             taskDetailViewModel.updateTask(task)
             true

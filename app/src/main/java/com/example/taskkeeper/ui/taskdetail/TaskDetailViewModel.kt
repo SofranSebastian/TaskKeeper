@@ -1,11 +1,8 @@
 package com.example.taskkeeper.ui.taskdetail
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.taskkeeper.database.model.Task
-import com.example.taskkeeper.database.TaskDatabase
 import com.example.taskkeeper.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
