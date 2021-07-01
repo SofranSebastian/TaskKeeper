@@ -2,22 +2,20 @@ package com.example.taskkeeper.ui.taskdetail
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.taskkeeper.database.model.Task
 import com.example.taskkeeper.database.TaskDatabase
 import com.example.taskkeeper.repository.TaskRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TaskDetailViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository: TaskRepository
-
-    //first executed when the TasksViewerViewModel is called
-    init {
-        val taskDao = TaskDatabase.getDatabase(application).userDao()
-        repository = TaskRepository(taskDao)
-    }
+@HiltViewModel
+class TaskDetailViewModel @Inject constructor(
+    private var repository: TaskRepository
+) : ViewModel() {
 
     fun deleteTask(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {
