@@ -1,7 +1,9 @@
 package com.example.taskkeeper.ui.tasksviewer
 
 import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskkeeper.R
 import com.example.taskkeeper.databinding.FragmentTasksViewerBinding
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TasksViewerFragment : Fragment() {
 
     private lateinit var binding: FragmentTasksViewerBinding
@@ -73,6 +79,7 @@ class TasksViewerFragment : Fragment() {
         //reference for the binding object
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_tasks_viewer, container, false)
+
         return binding.root
 
     }
