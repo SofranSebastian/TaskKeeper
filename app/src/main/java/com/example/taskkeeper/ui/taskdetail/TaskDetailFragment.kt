@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.taskkeeper.R
 import com.example.taskkeeper.databinding.FragmentTaskDetailBinding
 import com.example.taskkeeper.mapper.toTask
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TaskDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskDetailBinding
@@ -81,6 +83,7 @@ class TaskDetailFragment : Fragment() {
 
         dialogBuilder.create().show()
     }
+
 
     private fun updateTask() {
         val bottomSheetFragment = BottomSheetUpdateFragment(arguments.item.toTask())

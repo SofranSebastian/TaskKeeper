@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskkeeper.R
 import com.example.taskkeeper.databinding.FragmentHolidaysViewerBinding
 import com.example.taskkeeper.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HolidaysViewerFragment : Fragment() {
 
     private lateinit var binding: FragmentHolidaysViewerBinding
