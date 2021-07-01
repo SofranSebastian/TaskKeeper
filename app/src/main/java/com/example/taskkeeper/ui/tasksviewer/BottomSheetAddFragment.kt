@@ -12,7 +12,9 @@ import com.example.taskkeeper.R
 import com.example.taskkeeper.database.model.Task
 import com.example.taskkeeper.databinding.BottomsheetModalAddFormBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BottomSheetAddFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomsheetModalAddFormBinding

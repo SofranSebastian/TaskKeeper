@@ -14,7 +14,9 @@ import com.example.taskkeeper.database.model.Task
 import com.example.taskkeeper.databinding.BottomsheetModalUpdateFormBinding
 import com.example.taskkeeper.mapper.toTaskItem
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BottomSheetUpdateFragment(private val individualTask: Task) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomsheetModalUpdateFormBinding
