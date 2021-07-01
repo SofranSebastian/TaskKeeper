@@ -3,8 +3,11 @@ package com.example.taskkeeper.repository
 import androidx.lifecycle.LiveData
 import com.example.taskkeeper.database.TaskDao
 import com.example.taskkeeper.database.model.Task
+import javax.inject.Inject
 
-class TaskRepository(private val taskDao: TaskDao) {
+class TaskRepository @Inject constructor(
+    private val taskDao: TaskDao
+) {
     val getAllTasks: LiveData<List<Task>> = taskDao.getAllTasks()
 
     suspend fun addTask(task: Task) {
