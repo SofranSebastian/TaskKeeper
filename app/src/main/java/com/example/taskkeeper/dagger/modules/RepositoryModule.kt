@@ -16,7 +16,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideHolidaysRepository() = HolidaysRepository()
+    fun provideHolidaysRepository() =
+        HolidaysRepository(NetworkingModule.provideRetrofitInstance())
 
     @Provides
     @Singleton
