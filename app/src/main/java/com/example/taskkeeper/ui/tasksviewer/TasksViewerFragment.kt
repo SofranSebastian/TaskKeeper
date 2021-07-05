@@ -86,7 +86,7 @@ class TasksViewerFragment : Fragment() {
         binding.tasksViewerViewModel = tasksViewerViewModel
 
         //create the adapter
-        adapter = TaskAdapter(mutableListOf(), TaskListener { it ->
+        adapter = TaskAdapter(mutableListOf(), TaskListener {
             tasksViewerViewModel.onTaskClicked(it)
         })
 
