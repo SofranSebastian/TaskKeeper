@@ -1,21 +1,13 @@
 package com.example.taskkeeper.api
 
-import com.example.taskkeeper.utils.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-object RetrofitInstance {
 
-    private val retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-    }
-
+class RetrofitInstance @Inject constructor(
+    private val retrofit: Retrofit
+) {
     val api: Api by lazy {
         retrofit.create(Api::class.java)
     }
-
 }
