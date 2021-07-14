@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.taskkeeper"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -75,6 +75,10 @@ dependencies {
     //Dagger Hilt
     implementation 'com.google.dagger:hilt-android:2.35'
     kapt 'com.google.dagger:hilt-android-compiler:2.35'
+
+    // space.one
+    ext.spo_networking_version = "0.23.3"
+    implementation "one.space.networking:spo-core:$spo_networking_version"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'

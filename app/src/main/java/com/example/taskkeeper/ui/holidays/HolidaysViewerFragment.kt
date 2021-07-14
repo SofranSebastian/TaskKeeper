@@ -1,6 +1,7 @@
 package com.example.taskkeeper.ui.holidays
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,9 @@ import com.example.taskkeeper.R
 import com.example.taskkeeper.databinding.FragmentHolidaysViewerBinding
 import com.example.taskkeeper.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
+import one.space.networking.core.SpoClient
+import one.space.networking.core.SpoClientConfig
+import one.space.networking.core.model.SpoAppCredentials
 
 @AndroidEntryPoint
 class HolidaysViewerFragment : Fragment() {
@@ -30,6 +34,7 @@ class HolidaysViewerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_holidays_viewer, container, false)
         return binding.root
@@ -50,9 +55,13 @@ class HolidaysViewerFragment : Fragment() {
 
         holidaysViewerViewModel.holidaysList.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
-                it.body()?.let { it1 -> adapter.setHolidayList(it1) }
+                Log.d("INTERNET RESPONSE", it.code().toString())
+                it.body()?.let { responseBody ->
+                    Log.d("INTERNET RESPONSE", responseBody.toString())
+                    adapter.setHolidayList(responseBody)
+                }
             } else {
-                Toast.makeText(this.context, it.code(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Try to connect to an internet source.", Toast.LENGTH_SHORT).show()
             }
         }
 

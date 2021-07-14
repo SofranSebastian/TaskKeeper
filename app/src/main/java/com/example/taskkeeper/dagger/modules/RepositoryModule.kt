@@ -1,6 +1,7 @@
 package com.example.taskkeeper.dagger.modules
 
 import android.content.Context
+import com.example.taskkeeper.networking.NetworkConnection
 import com.example.taskkeeper.repository.HolidaysRepository
 import com.example.taskkeeper.repository.TaskRepository
 import dagger.Module
@@ -16,8 +17,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideHolidaysRepository() =
-        HolidaysRepository(NetworkingModule.provideRetrofitInstance())
+    fun provideHolidaysRepository(networkConnection: NetworkConnection) =
+        HolidaysRepository(NetworkingModule.provideRetrofitInstance(networkConnection))
 
     @Provides
     @Singleton
