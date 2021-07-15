@@ -6,7 +6,7 @@ import one.space.networking.core.annotations.SpoItemId
 @SpoEntity("task")
 data class TaskItemSpo(
     @SpoItemId
-    var id: Long,
+    var id: Long = 0L,
     var title: String,
     var description: String,
     var priority: String

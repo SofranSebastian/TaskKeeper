@@ -1,18 +1,22 @@
 package com.example.taskkeeper.ui.tasksviewer
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.taskkeeper.database.model.Task
 import com.example.taskkeeper.database.model.TaskItem
 import com.example.taskkeeper.mapper.toTaskItem
+import com.example.taskkeeper.networking.spaceone.model.TaskItemSpo
 import com.example.taskkeeper.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import one.space.networking.core.SpoClient
 import javax.inject.Inject
 
 @HiltViewModel
 class TasksViewerViewModel @Inject constructor(
-    private var repository: TaskRepository
+    private var repository: TaskRepository,
+    private val spoClient: SpoClient
 ) : ViewModel() {
 
     private val tasksList: LiveData<List<Task>>
@@ -22,9 +26,16 @@ class TasksViewerViewModel @Inject constructor(
         list.map { it.toTaskItem() }
     }
 
-    fun addTask(task: Task) {
+    fun addTask(task: TaskItemSpo) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addTask(task)
+            val response = spoClient.item()
+                    .createItem(task)
+            if(response.isSuccessful){
+                Log.i("SpoResponse", "success")
+            }else{
+                Log.i("SpoResponse", "failed")
+            }
+
         }
     }
 

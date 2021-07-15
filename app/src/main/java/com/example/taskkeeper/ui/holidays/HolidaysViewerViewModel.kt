@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.taskkeeper.exceptions.NoInternetException
 import com.example.taskkeeper.networking.spaceone.model.TaskItemSpo
 import com.example.taskkeeper.repository.HolidaysRepository
-import com.example.taskkeeper.repository.SpoRepository
 import com.example.taskkeeper.ui.holidays.model.HolidayObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -20,7 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class HolidaysViewerViewModel @Inject constructor(
     private val repository: HolidaysRepository,
-    private val spoRepository: SpoRepository,
     private val spoClient: SpoClient
 ) : ViewModel() {
 
