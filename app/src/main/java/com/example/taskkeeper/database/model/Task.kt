@@ -1,4 +1,4 @@
-package com.example.taskkeeper.database
+package com.example.taskkeeper.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,5 +10,5 @@ data class Task(
     val id: Int,
     val title: String,
     val description: String,
-    val priority: String,
+    val priority: String
 )

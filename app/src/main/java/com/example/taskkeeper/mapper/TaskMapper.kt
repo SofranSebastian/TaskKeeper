@@ -1,7 +1,7 @@
-package com.example.taskkeeper.utils
+package com.example.taskkeeper.mapper
 
-import com.example.taskkeeper.database.Task
-import com.example.taskkeeper.database.TaskItem
+import com.example.taskkeeper.database.model.Task
+import com.example.taskkeeper.database.model.TaskItem
 
 fun Task.toTaskItem() = TaskItem(
     id = id,

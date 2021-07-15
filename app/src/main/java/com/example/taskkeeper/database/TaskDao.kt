@@ -2,6 +2,7 @@ package com.example.taskkeeper.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.taskkeeper.database.model.Task
 
 @Dao
 interface TaskDao {

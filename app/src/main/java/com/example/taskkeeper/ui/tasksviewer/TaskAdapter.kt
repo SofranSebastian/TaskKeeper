@@ -1,12 +1,12 @@
-package com.example.taskkeeper.tasksviewer
+package com.example.taskkeeper.ui.tasksviewer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.taskkeeper.database.TaskItem
+import com.example.taskkeeper.database.model.TaskItem
 import com.example.taskkeeper.databinding.ItemTaskLayoutBinding
 
-class TaskAdapter(private val tasksList: MutableList<TaskItem>, val clickListener: TaskListener) :
+class TaskAdapter(private val tasksList: MutableList<TaskItem>, private val clickListener: TaskListener) :
     RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     //class for the view holder which takes as parameter a layout

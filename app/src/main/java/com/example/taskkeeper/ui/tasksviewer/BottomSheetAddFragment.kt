@@ -1,4 +1,4 @@
-package com.example.taskkeeper.tasksviewer
+package com.example.taskkeeper.ui.tasksviewer
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.taskkeeper.R
-import com.example.taskkeeper.database.Task
 import com.example.taskkeeper.databinding.BottomsheetModalAddFormBinding
+import com.example.taskkeeper.networking.spaceone.model.TaskItemSpo
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class BottomSheetFragment : BottomSheetDialogFragment() {
+@AndroidEntryPoint
+class BottomSheetAddFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomsheetModalAddFormBinding
     private val tasksViewerViewModel: TasksViewerViewModel by viewModels()
@@ -43,7 +45,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         val priority = binding.spinner.selectedItem.toString()
 
         return if (checkInput(title, description)) {
-            val task = Task(id = 0, title = title, description = description, priority = priority)
+            val task = TaskItemSpo(title = title, description = description, priority = priority)
             tasksViewerViewModel.addTask(task)
             true
         } else {

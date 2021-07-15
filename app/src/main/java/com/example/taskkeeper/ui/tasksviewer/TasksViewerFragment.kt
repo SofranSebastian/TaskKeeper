@@ -1,4 +1,4 @@
-package com.example.taskkeeper.tasksviewer
+package com.example.taskkeeper.ui.tasksviewer
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -12,10 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskkeeper.R
 import com.example.taskkeeper.databinding.FragmentTasksViewerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TasksViewerFragment : Fragment() {
 
     private lateinit var binding: FragmentTasksViewerBinding
@@ -72,6 +75,7 @@ class TasksViewerFragment : Fragment() {
         //reference for the binding object
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_tasks_viewer, container, false)
+
         return binding.root
 
     }
@@ -82,7 +86,7 @@ class TasksViewerFragment : Fragment() {
         binding.tasksViewerViewModel = tasksViewerViewModel
 
         //create the adapter
-        adapter = TaskAdapter(mutableListOf(), TaskListener { it ->
+        adapter = TaskAdapter(mutableListOf(), TaskListener {
             tasksViewerViewModel.onTaskClicked(it)
         })
 
@@ -106,10 +110,8 @@ class TasksViewerFragment : Fragment() {
 
         //observer for the click listener for the 'See More' button
         tasksViewerViewModel.seeMoreClicked.observe(viewLifecycleOwner) {
-            it?.let {
-                setVisibility(it)
-                setAnimation(it)
-            }
+            setVisibility(it)
+            setAnimation(it)
         }
 
         //dummy click listeners for the 'Delete All' and 'Add' FAB's
@@ -131,8 +133,13 @@ class TasksViewerFragment : Fragment() {
         }
 
         binding.addTaskButton.setOnClickListener {
-            val bottomSheetFragment = BottomSheetFragment()
+            val bottomSheetFragment = BottomSheetAddFragment()
             bottomSheetFragment.show(parentFragmentManager, "BottomSheetDialog")
         }
+
+        val bnv = binding.bottomNavigationView
+        val navController = this.findNavController()
+        bnv.setupWithNavController(navController)
+
     }
 }
